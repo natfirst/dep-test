@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://caption"
+        class="com.company.deptest.web.newentity.NewEntityBrowse"
+        focusComponent="newEntitiesTable"
+        lookupComponent="newEntitiesTable"
+        messagesPack="com.company.deptest.web.newentity">
+    <dsContext>
+        <datasource id="newEntityDs"
+                    class="com.company.deptest.entity.NewEntity"
+                    view="_local"/>
+        <groupDatasource id="newEntitiesDs"
+                         class="com.company.deptest.entity.NewEntity"
+                         view="_local">
+            <query>
+                <![CDATA[select e from deptest$NewEntity e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <actions>
+        <action id="save"
+                caption="mainMsg://actions.Ok"
+                icon="icons/ok.png"
+                invoke="save"
+                shortcut="CTRL-ENTER"/>
+        <action id="cancel"
+                caption="mainMsg://actions.Cancel"
+                icon="icons/cancel.png"
+                invoke="cancel"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <split id="split"
+               height="100%"
+               orientation="horizontal"
+               reversePosition="true"
+               width="100%">
+            <vbox id="lookupBox"
+                  expand="newEntitiesTable"
+                  height="100%"
+                  margin="false,true,false,false"
+                  spacing="true">
+                <filter id="filter"
+                        applyTo="newEntitiesTable"
+                        datasource="newEntitiesDs">
+                    <properties include=".*"/>
+                </filter>
+                <groupTable id="newEntitiesTable"
+                            width="100%">
+                    <actions>
+                        <action id="create"/>
+                        <action id="edit"/>
+                        <action id="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="name"/>
+                    </columns>
+                    <rows datasource="newEntitiesDs"/>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="createBtn"
+                                action="newEntitiesTable.create"/>
+                        <button id="editBtn"
+                                action="newEntitiesTable.edit"/>
+                        <button id="removeBtn"
+                                action="newEntitiesTable.remove"/>
+                    </buttonsPanel>
+                </groupTable>
+            </vbox>
+            <vbox id="editBox"
+                  expand="fieldGroupBox"
+                  height="100%"
+                  margin="false,false,false,true"
+                  spacing="true">
+                <vbox id="fieldGroupBox">
+                    <fieldGroup id="fieldGroup"
+                                datasource="newEntityDs">
+                        <column width="250px">
+                            <field id="name"/>
+                        </column>
+                    </fieldGroup>
+                </vbox>
+                <hbox id="actionsPane"
+                      spacing="true"
+                      visible="false">
+                    <button id="saveBtn"
+                            action="save"/>
+                    <button id="cancelBtn"
+                            action="cancel"/>
+                </hbox>
+            </vbox>
+        </split>
+    </layout>
+</window>
