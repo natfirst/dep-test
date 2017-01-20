@@ -4,5 +4,6 @@
     <persistence-unit name="dep-test"
                       transaction-type="RESOURCE_LOCAL">
         <class>com.company.deptest.entity.NewEntity</class>
+        <class>com.company.deptest.entity.Test</class>
     </persistence-unit>
 </persistence>
